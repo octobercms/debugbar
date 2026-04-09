@@ -9,10 +9,9 @@ use Cms\Classes\Page;
 use Cms\Classes\Layout;
 use Cms\Classes\Controller as CmsController;
 use Backend\Classes\Controller as BackendController;
-use Fruitcake\LaravelDebugbar\ServiceProvider as BaseServiceProvider;
 use Fruitcake\LaravelDebugbar\LaravelDebugbar;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
+use Illuminate\Support\ServiceProvider as ServiceProviderBase;
 use October\Debugbar\DataCollectors\OctoberBackendCollector;
 use October\Debugbar\DataCollectors\OctoberCmsCollector;
 use October\Debugbar\DataCollectors\OctoberComponentsCollector;
@@ -24,23 +23,21 @@ use Twig\Profiler\Profile;
 /**
  * ServiceProvider for October CMS Debugbar integration
  */
-class ServiceProvider extends BaseServiceProvider
+class ServiceProvider extends ServiceProviderBase
 {
     /**
      * register the service provider
      */
     public function register(): void
     {
-        parent::register();
+        $this->app->register(\Fruitcake\LaravelDebugbar\ServiceProvider::class);
     }
 
     /**
      * boot the service provider
      */
-    public function boot(Dispatcher $events): void
+    public function boot(): void
     {
-        parent::boot($events);
-
         if (!LaravelDebugbar::canBeEnabled()) {
             return;
         }
