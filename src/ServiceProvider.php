@@ -64,7 +64,7 @@ class ServiceProvider extends ServiceProviderBase
         }
 
         // Register AJAX exception middleware
-        if (Config::get('app.debug_ajax', Config::get('app.debugAjax', false))) {
+        if (Config::get('debugbar.capture_ajax', true)) {
             $this->app[HttpKernelContract::class]->pushMiddleware(InterpretsAjaxExceptions::class);
         }
 

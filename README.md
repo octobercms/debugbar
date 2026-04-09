@@ -40,11 +40,7 @@ Or create `config/debugbar.php` manually. See the [default configuration](config
 
 ## AJAX Debugging
 
-To include debugbar data in AJAX response headers, set `debug_ajax` to `true` in `config/app.php`:
-
-```php
-'debug_ajax' => true,
-```
+AJAX requests are captured by the debugbar automatically and displayed in the toolbar dropdown. To disable this, set `capture_ajax` to `false` in `config/debugbar.php`.
 
 ## License
 
