@@ -137,11 +137,8 @@ class ServiceProvider extends ServiceProviderBase
             }
         });
 
-        if (class_exists(\DebugBar\Bridge\NamespacedTwigProfileCollector::class)) {
-            $debugbar->addCollector(new \DebugBar\Bridge\NamespacedTwigProfileCollector($profile));
-        }
-        elseif (class_exists(\DebugBar\Bridge\TwigProfileCollector::class)) {
-            $debugbar->addCollector(new \DebugBar\Bridge\TwigProfileCollector($profile));
+        if (class_exists(\DebugBar\Bridge\Twig\NamespacedTwigProfileCollector::class)) {
+            $debugbar->addCollector(new \DebugBar\Bridge\Twig\NamespacedTwigProfileCollector($profile));
         }
     }
 

@@ -10,7 +10,8 @@
     },
     "require": {
         "php": "^8.2",
-        "fruitcake/laravel-debugbar": "^4.0"
+        "fruitcake/laravel-debugbar": "^4.0",
+        "php-debugbar/twig-bridge": "^2.0"
     },
     "autoload": {
         "psr-4": {
