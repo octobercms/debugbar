@@ -1,0 +1,38 @@
+{
+    "name": "october/debugbar",
+    "description": "Debugbar integration for October CMS.",
+    "keywords": ["dev", "octobercms", "debugbar"],
+    "homepage": "https://github.com/octobercms/debugbar",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/octobercms/debugbar/issues",
+        "source": "https://github.com/octobercms/debugbar"
+    },
+    "require": {
+        "php": "^8.2",
+        "fruitcake/laravel-debugbar": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "October\\Debugbar\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "laravel": {
+            "dont-discover": [
+                "fruitcake/laravel-debugbar"
+            ],
+            "providers": [
+                "October\\Debugbar\\ServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
