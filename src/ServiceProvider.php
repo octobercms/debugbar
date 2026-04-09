@@ -30,6 +30,10 @@ class ServiceProvider extends ServiceProviderBase
     public function register(): void
     {
         $this->app->register(\Fruitcake\LaravelDebugbar\ServiceProvider::class);
+
+        $this->publishes([
+            base_path('vendor/fruitcake/laravel-debugbar/config/debugbar.php') => config_path('debugbar.php')
+        ], 'config');
     }
 
     /**
