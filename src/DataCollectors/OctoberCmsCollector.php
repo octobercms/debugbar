@@ -53,7 +53,7 @@ class OctoberCmsCollector extends DataCollector implements Renderable
         }
 
         foreach ($this->page->toArray() as $key => $value) {
-            $result[$key] = is_scalar($value) ? $value : $this->formatVar($value);
+            $result[$key] = is_scalar($value) ? $value : $this->getDataFormatter()->formatVar($value);
         }
 
         return $result;

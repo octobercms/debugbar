@@ -128,7 +128,7 @@ class ServiceProvider extends ServiceProviderBase
             $twig = $controller->getTwig();
 
             if (!$twig->hasExtension(\Fruitcake\LaravelDebugbar\Twig\Extension\Debug::class)) {
-                $twig->addExtension(new \Fruitcake\LaravelDebugbar\Twig\Extension\Debug($this->app));
+                $twig->addExtension(new \Fruitcake\LaravelDebugbar\Twig\Extension\Debug(null));
                 $twig->addExtension(new \Fruitcake\LaravelDebugbar\Twig\Extension\Stopwatch($this->app));
             }
 

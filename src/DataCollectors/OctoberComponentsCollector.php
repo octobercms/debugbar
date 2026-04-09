@@ -39,11 +39,11 @@ class OctoberComponentsCollector extends DataCollector implements Renderable
         $components = [];
 
         foreach ($this->layout->components as $alias => $componentObj) {
-            $components[$alias] = $this->formatVar($this->makeComponentDetails($componentObj));
+            $components[$alias] = $this->getDataFormatter()->formatVar($this->makeComponentDetails($componentObj));
         }
 
         foreach ($this->page->components as $alias => $componentObj) {
-            $components[$alias] = $this->formatVar($this->makeComponentDetails($componentObj));
+            $components[$alias] = $this->getDataFormatter()->formatVar($this->makeComponentDetails($componentObj));
         }
 
         return $components;
