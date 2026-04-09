@@ -11,6 +11,7 @@ use Cms\Classes\Controller as CmsController;
 use Backend\Classes\Controller as BackendController;
 use Fruitcake\LaravelDebugbar\ServiceProvider as BaseServiceProvider;
 use Fruitcake\LaravelDebugbar\LaravelDebugbar;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
 use October\Debugbar\DataCollectors\OctoberBackendCollector;
 use October\Debugbar\DataCollectors\OctoberCmsCollector;
@@ -36,9 +37,9 @@ class ServiceProvider extends BaseServiceProvider
     /**
      * boot the service provider
      */
-    public function boot(): void
+    public function boot(Dispatcher $events): void
     {
-        parent::boot();
+        parent::boot($events);
 
         if (!LaravelDebugbar::canBeEnabled()) {
             return;
