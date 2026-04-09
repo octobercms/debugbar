@@ -34,7 +34,7 @@ class OctoberComponentsCollector extends DataCollector implements Renderable
     /**
      * {@inheritDoc}
      */
-    public function collect()
+    public function collect(): array
     {
         $components = [];
 
@@ -63,7 +63,7 @@ class OctoberComponentsCollector extends DataCollector implements Renderable
     /**
      * {@inheritDoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'components';
     }
@@ -71,7 +71,7 @@ class OctoberComponentsCollector extends DataCollector implements Renderable
     /**
      * {@inheritDoc}
      */
-    public function getWidgets()
+    public function getWidgets(): array
     {
         return [
             "components" => [

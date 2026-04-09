@@ -15,7 +15,6 @@ use Illuminate\Support\ServiceProvider as ServiceProviderBase;
 use October\Debugbar\DataCollectors\OctoberBackendCollector;
 use October\Debugbar\DataCollectors\OctoberCmsCollector;
 use October\Debugbar\DataCollectors\OctoberComponentsCollector;
-use October\Debugbar\DataCollectors\OctoberModelsCollector;
 use October\Debugbar\Middleware\InterpretsAjaxExceptions;
 use Twig\Extension\ProfilerExtension;
 use Twig\Profiler\Profile;
@@ -42,6 +41,18 @@ class ServiceProvider extends ServiceProviderBase
             return;
         }
 
+        // Defer until after all providers have booted so fruitcake's
+        // routes and collectors are registered first
+        $this->app->booted(function () {
+            $this->bootDebugbar();
+        });
+    }
+
+    /**
+     * bootDebugbar registers October-specific collectors and extensions
+     */
+    protected function bootDebugbar(): void
+    {
         $debugbar = $this->app->make(LaravelDebugbar::class);
 
         if (!$debugbar->isEnabled()) {
@@ -63,17 +74,6 @@ class ServiceProvider extends ServiceProviderBase
             $this->registerCmsTwigExtensions($debugbar);
             $this->addFrontendCollectors($debugbar);
         }
-
-        $this->addGlobalCollectors($debugbar);
-    }
-
-    /**
-     * addGlobalCollectors adds globally available collectors
-     */
-    protected function addGlobalCollectors(LaravelDebugbar $debugbar): void
-    {
-        $modelsCollector = $this->app->make(OctoberModelsCollector::class);
-        $debugbar->addCollector($modelsCollector);
     }
 
     /**
