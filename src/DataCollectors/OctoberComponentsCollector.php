@@ -39,25 +39,34 @@ class OctoberComponentsCollector extends DataCollector implements Renderable
         $components = [];
 
         foreach ($this->layout->components as $alias => $componentObj) {
-            $components[$alias] = $this->getDataFormatter()->formatVar($this->makeComponentDetails($componentObj));
+            $components[$alias] = $this->formatComponent($componentObj);
         }
 
         foreach ($this->page->components as $alias => $componentObj) {
-            $components[$alias] = $this->getDataFormatter()->formatVar($this->makeComponentDetails($componentObj));
+            $components[$alias] = $this->formatComponent($componentObj);
         }
 
         return $components;
     }
 
     /**
-     * makeComponentDetails builds a useful array to describe a component
+     * formatComponent builds a readable string to describe a component
      */
-    protected function makeComponentDetails($componentObj): array
+    protected function formatComponent($componentObj): string
     {
-        return [
-            'class' => get_class($componentObj),
-            'props' => $componentObj->getProperties()
-        ];
+        $class = get_class($componentObj);
+        $props = $componentObj->getProperties();
+
+        if (empty($props)) {
+            return $class;
+        }
+
+        $parts = [];
+        foreach ($props as $key => $value) {
+            $parts[] = $key . '=' . (is_scalar($value) ? var_export($value, true) : gettype($value));
+        }
+
+        return $class . ' (' . implode(', ', $parts) . ')';
     }
 
     /**
