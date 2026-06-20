@@ -14,13 +14,7 @@
         "php-debugbar/twig-bridge": "^2.0"
     },
     "conflict": {
-        "october/backend": "<4.0",
-        "october/cms": "<4.0",
-        "october/dashboard": "<4.0",
-        "october/editor": "<4.0",
-        "october/media": "<4.0",
-        "october/system": "<4.0",
-        "october/tailor": "<4.0"
+        "october/rain": "<4.0"
     },
     "autoload": {
         "psr-4": {
