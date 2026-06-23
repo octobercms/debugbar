@@ -15,6 +15,7 @@ use Illuminate\Support\ServiceProvider as ServiceProviderBase;
 use October\Debugbar\DataCollectors\OctoberBackendCollector;
 use October\Debugbar\DataCollectors\OctoberCmsCollector;
 use October\Debugbar\DataCollectors\OctoberComponentsCollector;
+use October\Debugbar\Middleware\InjectDebugbar;
 use October\Debugbar\Middleware\InterpretsAjaxExceptions;
 use Twig\Extension\ProfilerExtension;
 use Twig\Profiler\Profile;
@@ -34,6 +35,10 @@ class ServiceProvider extends ServiceProviderBase
         $this->publishes([
             base_path('vendor/fruitcake/laravel-debugbar/config/debugbar.php') => config_path('debugbar.php')
         ], 'config');
+
+        // Replace fruitcake's middleware with our gated subclass so the
+        // toolbar is only injected for signed-in super users.
+        $this->app->bind(\Fruitcake\LaravelDebugbar\Middleware\InjectDebugbar::class, InjectDebugbar::class);
     }
 
     /**

@@ -17,6 +17,10 @@ composer require october/debugbar --dev
 
 The debugbar is enabled automatically when `APP_DEBUG=true`. You can override this with the `DEBUGBAR_ENABLED` environment variable.
 
+## Access Control
+
+The toolbar is only injected for signed-in backend super users. Anonymous frontend visitors and non-super-user backend admins see no debugbar, and no debugbar data is written to disk for their requests. This makes it safe to leave `DEBUGBAR_ENABLED=true` on a live site when you need to debug a production-only issue, since only super users can see the captured data.
+
 ## October CMS Collectors
 
 In addition to the standard Laravel Debugbar collectors, the following October-specific collectors are included:
